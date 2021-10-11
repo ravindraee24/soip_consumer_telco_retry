@@ -1,0 +1,72 @@
+info:
+  app:
+    name: xiaomi_soip_consumer
+    description: soip  consumer messaging on Xiaomi
+    version: 1.0
+
+badreq:
+    rabbitmq:
+        exchange: telco.exchange
+        queue: queue.telcoeerror
+        routingkey: telcoerror.routing
+javainuse:
+    rabbitmq:
+        routingkey: routing.telco
+jsa:
+    rabbitmq:
+        exchange: telco.exchange
+        queue: telco.queue
+logging:
+    level:
+        org:
+            hibernate:
+                SQL: DEBUG
+                type:
+                    descriptor:
+                        sql:
+                            BasicBinder: TRACE
+        root: error
+ACTIVECONNECT:
+    connect:
+        timeout: 10000
+    password: xXGRg
+    read:
+        timeout: 10000
+    templateId: all
+    url: https://api.oot.bz/api/v1/send?username={username}&password={password}&unicode={unicode}&from={from}&to={msisdn}&text={msg}&dltContentId={templateid}&corelationid={corelationid}
+    user: sddemo.trans
+ICS:
+    connect:
+        timeout: 10000
+    password: xXGRg
+    read:
+        timeout: 10000
+    templateId: all
+    url: https://vbulk.sendmsg.in/api/vbulk/index.php?username={username}&password={password}&to=91{msisdn}&from={from}&text={msg}
+    user: sddemo.trans
+spring:
+  profiles:
+    active: development
+  datasource:
+    url: jdbc:mysql://192.168.25.130:3306/enterprise?autoReconnect=true&useSSL=false
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 
+  jpa:
+        hibernate:
+            ddl-auto: validate
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        show-sql: true
+  main:
+        banner-mode: 'off'
+  
+  rabbitmq:
+        host: 127.0.0.1
+        port: 5672
+        username: admin
+        password: admin
+  redis:
+        host: 172.29.90.17
+        port: 6379
